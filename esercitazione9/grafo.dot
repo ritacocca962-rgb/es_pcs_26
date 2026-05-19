@@ -1,0 +1,20 @@
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include "undirected_graph.hpp"
+void salvare_dot(const unidirected_graph& grafo, const std::string& nome_file) {
+	std::ofstream out(nome_file); 
+	if (!out) {
+		std::cout << "errore" << "\n"; 
+		return; 
+	}; 
+	
+	out << "grafo { " << std::endl; 
+	
+	std::vector<unidirected_edge> archi = grafo.all_edges(); 
+	
+	for (const auto& arco : archi) {
+		out << " " << arco.from() << " --  " << arco.to()<< std::endl; 
+	}; 
+	out << "}" << "\n"; out.close(); 
+}; 
